@@ -8,7 +8,7 @@
     describe('A Collection constructor', function () {
         describe(', when run', function () {
             it('should return a new object', function () {
-              var students = new Collection;
+              var students = new Collection();
  
               expect(students.constructor.name).to.equal("Collection");
             });
@@ -50,11 +50,38 @@
       });
  
       describe("has an .add() method",function(){
-        it("should add the object it's given to the models property");
-        it("should increase the models property's length by 1");
-        it("should only accept a single object as an argument");
-        it("should not  accept an empty object as an argument");
-        it("should throw an error when given an object without and id property");
+        it("should add the object it's given to the models property", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob', id:'24'};
+          students.add(newStudent);
+          expect( _.contains(students.models, newStudent)).to.be.true;
+        });
+
+        it("should increase the models property's length by 1", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob', id:'24'};
+          var startLength = students.models.length;
+          students.add(newStudent);
+          var endLength = students.models.length;
+          expect(startLength + 1).to.equal (endLength);
+        });
+
+        it("should only accept a single object as an argument", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob', id:'24'};
+          expect(function(){students.add(newStudent, newStudent)}).to.throw(Error);
+        });
+
+        it("should not  accept an empty object as an argument", function () {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect( function(){ students.add({}) } ).to.throw(Error);
+        });
+
+        it("should throw an error when given an object without an id property", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob'};
+          expect( function(){students.add(newStudent)}).to.throw(Error);
+        });
       });
  
       describe("has a .remove() method",function(){

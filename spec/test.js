@@ -85,10 +85,30 @@
       });
  
       describe("has a .remove() method",function(){
-        it("should, when given an id, remove the corresponding object from the models property")
-        it("should decrease the models property's length by 1");
-        it("should only accept a single string as an id argument");
-        it("should return true on successful removal");
+        it("should, when given an id, remove the corresponding object from the models property", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          students.remove('99');
+          expect( _.findWhere(students.models, {id: '99'})).to.equal(undefined);
+        });
+
+        it("should decrease the models property's length by 1", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var startLength = students.models.length;
+          students.remove('99');          
+          var endLength = students.models.length;
+          expect(startLength - 1).to.equal (endLength);
+        });
+
+        it("should only accept a single string as an id argument", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect(function() { students.remove('99', '24') }).to.throw(Error);         
+        });
+
+        it("should return true on successful removal", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect(function() { students.remove('99') }).to.return.true;            
+        });
+
       })
     })
 })();

@@ -43,4 +43,16 @@ function Collection (models) {
       return true;
     }
   }
+
+  this.random = function(num) {
+    num = num || 1;
+    if ( _.isNumber(num) === false) throw new Error("the .random() method will only accept a single number as an argument")
+    if ( arguments.length > 1) throw new Error("the .random() method will only accept a single number as an argument")
+    return _.sample(this.models, num);
+  }
+
+  this.length = function() {
+    if (arguments.length > 0) throw new Error(" the .length() method receives NO arguments");
+    return this.models.length;
+  }
 }

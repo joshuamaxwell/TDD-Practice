@@ -8,7 +8,7 @@
     describe('A Collection constructor', function () {
         describe(', when run', function () {
             it('should return a new object', function () {
-              var students = new Collection;
+              var students = new Collection();
  
               expect(students.constructor.name).to.equal("Collection");
             });
@@ -50,18 +50,165 @@
       });
  
       describe("has an .add() method",function(){
-        it("should add the object it's given to the models property");
-        it("should increase the models property's length by 1");
-        it("should only accept a single object as an argument");
-        it("should not  accept an empty object as an argument");
-        it("should throw an error when given an object without and id property");
+        it("should add the object it's given to the models property", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob', id:'24'};
+          students.add(newStudent);
+          expect( _.contains(students.models, newStudent)).to.be.true;
+        });
+
+        it("should increase the models property's length by 1", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob', id:'24'};
+          var startLength = students.models.length;
+          students.add(newStudent);
+          var endLength = students.models.length;
+          expect(startLength + 1).to.equal (endLength);
+        });
+
+        it("should only accept a single object as an argument", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob', id:'24'};
+          expect(function(){students.add(newStudent, newStudent)}).to.throw(Error);
+        });
+
+        it("should not  accept an empty object as an argument", function () {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect( function(){ students.add({}) } ).to.throw(Error);
+        });
+
+        it("should throw an error when given an object without an id property", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var newStudent = {name:'bob'};
+          expect( function(){students.add(newStudent)}).to.throw(Error);
+        });
       });
  
       describe("has a .remove() method",function(){
-        it("should, when given an id, remove the corresponding object from the models property")
-        it("should decrease the models property's length by 1");
-        it("should only accept a single string as an id argument");
-        it("should return true on successful removal");
+        it("should, when given an id, remove the corresponding object from the models property", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          students.remove('99');
+          expect( _.findWhere(students.models, {id: '99'})).to.equal(undefined);
+        });
+
+        it("should decrease the models property's length by 1", function(){
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          var startLength = students.models.length;
+          students.remove('99');          
+          var endLength = students.models.length;
+          expect(startLength - 1).to.equal (endLength);
+        });
+
+        it("should only accept a single string as an id argument", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect(function() { students.remove('99', '24') }).to.throw(Error);         
+        });
+
+        it("should return true on successful removal", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect( students.remove('99') ).to.be.true;            
+        });
+
       })
+      
+      describe("has an .empty() method", function(){
+        it("should result in an models array with length 0", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          students.empty();
+          expect(students.models.length).to.equal(0);
+        });
+
+        it("should not accept any arguments else throw an error", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect( function(){ students.empty('arg') } ).to.throw(Error);
+        });
+
+        it("should return true upon successful completion", function() {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+          expect(students.empty()).to.be.true;
+        });
+
+        it("should [need another one here]", function () {
+          var students = new Collection ([{name:'jim', id: '99'}]);
+
+          expect(false).to.be.true;
+        });
+
+      });
+
+      describe("has a .random() method", function(){
+        it("should return only objects from models property upon invocation", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          var randStudents = students.random(students.models.length);
+          var pure = true;
+          _.each(randStudents, function(elem) {
+            if (! _.contains(students.models, elem)) 
+              {
+                pure = false;
+              };
+          })
+          expect( pure ).to.be.true;
+          //chai has a .contain function
+        });
+
+        it("should accept only a number as its argument", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          expect( function() {students.random('1')}).to.throw(Error);
+          expect( function() {students.random({})}).to.throw(Error);
+          expect( function() {students.random([])}).to.throw(Error);
+
+        });
+
+        it("should accept only one argument", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          expect( function() {students.random(2,4)}).to.throw(Error);
+
+        });
+
+        it("should return the quantity requested in the argument or the entire array, which ever is smaller", function(){
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          var arrayLength = students.models.length;
+          expect( students.random(arrayLength - 1).length).to.equal(arrayLength -1);
+          expect( students.random(arrayLength + 2).length).to.equal(arrayLength);
+
+        });
+
+        it("should not return the array in the same original order as it exists", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          var randStudents = students.random(students.models.length); //get a random array of all the students
+          expect(randStudents === students).to.be.false;
+        })
+
+        it("should return a one item array from the array if no argument is given", function () {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          expect(students.random().length).to.equal(1);
+        });
+
+      });
+
+      describe("has a .length() method", function(){
+        it("should return the length of the array in the models property", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          expect(students.length()).to.equal(students.models.length);
+        });
+
+        it("should not accept any arguments", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          expect(function() { students.length('a')}).to.throw(Error);
+          expect(function() { students.length(2)}).to.throw(Error);
+          expect(function() { students.length({})}).to.throw(Error);
+        });
+
+        it("should not alter the original models array", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          var beforeArray = students.models;
+          students.length();
+          var afterArray = students.models;
+          expect(beforeArray).to.equal(afterArray);
+        });
+
+
+      });            
+
     })
 })();

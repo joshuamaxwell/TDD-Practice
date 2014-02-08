@@ -27,5 +27,12 @@ function Collection (models) {
     if (arguments.length > 1) throw new Error("you must provide a single model with an id property as an argument");
     this.models.push(model);
   }
-  
+
+  this.remove = function (id) {
+    if (arguments.length > 1) throw new Error("you must provide a single 'id' string as an argument");
+    else { 
+      this.models = _.reject(this.models, function(elem){ return( elem.id === id )});
+      return true;
+    }
+  }
 }

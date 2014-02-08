@@ -35,4 +35,12 @@ function Collection (models) {
       return true;
     }
   }
+
+  this.empty = function() {
+    if (arguments.length > 0) throw new Error("This method does not receive any arguments");
+    else {
+      this.models = [];
+      return true;
+    }
+  }
 }

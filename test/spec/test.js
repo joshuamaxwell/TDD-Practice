@@ -120,7 +120,7 @@
 
         it("should not accept any arguments else throw an error", function() {
           var students = new Collection ([{name:'jim', id: '99'}]);
-          expect(function(){ students.empty('arg')}).to.throw(Error);
+          expect( function(){ students.empty('arg') } ).to.throw(Error);
         });
 
         it("should return true upon successful completion", function() {

@@ -137,10 +137,17 @@
       });
 
       describe("has a .random() method", function(){
-        it("should return an object from models property upon invocation", function() {
+        it("should return only objects from models property upon invocation", function() {
           var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
-          randStudents = students.random();
-          expect( _.contains(students.models, randStudents.splice(0,1))).to.be.true;
+          var randStudents = students.random(students.models.length);
+          var pure = true;
+          _.each(randStudents, function(elem) {
+            if (! _.contains(students.models, elem)) 
+              {
+                pure = false;
+              };
+          })
+          expect( pure ).to.be.true;
           //chai has a .contain function
         });
 
@@ -171,6 +178,12 @@
           var randStudents = students.random(students.models.length); //get a random array of all the students
           expect(randStudents === students).to.be.false;
         })
+
+        it("should return a one item array from the array if no argument is given", function () {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          expect(students.random().length).to.equal(1);
+        });
+
       });
 
       describe("has a .length() method", function(){
@@ -188,16 +201,12 @@
 
         it("should not alter the original models array", function() {
           var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
-          beforeArray = students.models;
+          var beforeArray = students.models;
           students.length();
-          afterArray = students.models;
+          var afterArray = students.models;
           expect(beforeArray).to.equal(afterArray);
         });
 
-        it("should have another test here...", function () {
-          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
-          expect(false).to.be.true;
-        });
 
       });            
 

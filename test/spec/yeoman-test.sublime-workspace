@@ -4,8 +4,64 @@
 		"selected_items":
 		[
 			[
+				"argu",
+				"argument"
+			],
+			[
+				"ar",
+				"arguments"
+			],
+			[
+				"ran",
+				"random"
+			],
+			[
+				"con",
+				"contains"
+			],
+			[
+				"e",
+				"each"
+			],
+			[
+				"be",
+				"beforeArray"
+			],
+			[
+				"s",
+				"students"
+			],
+			[
+				"rand",
+				"randStudents"
+			],
+			[
+				"des",
+				"desiredNum"
+			],
+			[
+				"moe",
+				"models"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
 				"re",
-				"registerNewUser"
+				"return"
+			],
+			[
+				"id",
+				"id"
+			],
+			[
+				"th",
+				"throw"
+			],
+			[
+				"new",
+				"newStudent"
 			],
 			[
 				"us",
@@ -132,10 +188,6 @@
 				"numPogs"
 			],
 			[
-				"e",
-				"exampleObjectArray"
-			],
-			[
 				"Example",
 				"exampleObjectArray"
 			],
@@ -208,10 +260,6 @@
 				"babyGender"
 			],
 			[
-				"new",
-				"newChild"
-			],
-			[
 				"child",
 				"children"
 			],
@@ -238,10 +286,6 @@
 			[
 				"text",
 				"text-overlay"
-			],
-			[
-				"con",
-				"console"
 			],
 			[
 				"bac",
@@ -298,10 +342,6 @@
 			[
 				"hi",
 				"hitByCar"
-			],
-			[
-				"tr",
-				"true"
 			],
 			[
 				"have",
@@ -474,24 +514,32 @@
 			[
 				"in",
 				"inline-block"
-			],
-			[
-				"di",
-				"display"
-			],
-			[
-				"inline",
-				"inline-block"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"file": "/Users/joshuamaxwell/projects/better-yeoman-test-setup/app/scripts/main.js",
+			"settings":
+			{
+				"buffer_size": 1752,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/joshuamaxwell/projects/better-yeoman-test-setup/test/index.html",
+			"settings":
+			{
+				"buffer_size": 953,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "test.js",
 			"settings":
 			{
-				"buffer_size": 2765,
+				"buffer_size": 9498,
 				"line_ending": "Unix"
 			}
 		}
@@ -568,6 +616,12 @@
 	},
 	"file_history":
 	[
+		"/Users/joshuamaxwell/projects/better-yeoman-test-setup/.gitignore",
+		"/Users/joshuamaxwell/projects/better-yeoman-test-setup/.git/MERGE_MSG",
+		"/Users/joshuamaxwell/projects/better-yeoman-test-setup/app/scripts/main.js",
+		"/Users/joshuamaxwell/projects/better-yeoman-test-setup/test/spec/test.js",
+		"/Users/joshuamaxwell/projects/better-yeoman-test-setup/.git/COMMIT_EDITMSG",
+		"/Users/joshuamaxwell/projects/better-yeoman-test-setup/test/index.html",
 		"/Users/joshuamaxwell/projects/javascript-koans/koans/AboutHigherOrderFunctions.js",
 		"/Users/joshuamaxwell/projects/better-yeoman-test-setup/test/bower.json",
 		"/Users/joshuamaxwell/projects/javascript-koans/koans/AboutMutability.js",
@@ -637,6 +691,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"desiredNum",
+			"randStudent",
+			"\")",
+			"app",
 			"registerNewUser",
 			"tweetId",
 			"tweetID",
@@ -760,11 +818,7 @@
 			"div",
 			"input",
 			"join",
-			"header",
-			"17",
-			"timer",
-			"hare-buttons .tweet {\n  \n}",
-			"reward-t"
+			"header"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -788,31 +842,89 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "test.js",
+					"file": "/Users/joshuamaxwell/projects/better-yeoman-test-setup/app/scripts/main.js",
 					"settings":
 					{
-						"buffer_size": 2765,
+						"buffer_size": 1752,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2765,
-								2765
+								1650,
+								1650
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 688.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/joshuamaxwell/projects/better-yeoman-test-setup/test/index.html",
+					"settings":
+					{
+						"buffer_size": 953,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								758,
+								758
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "test.js",
+					"settings":
+					{
+						"buffer_size": 9498,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9367,
+								9367
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4351.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -916,6 +1028,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 134.0,
+	"side_bar_width": 185.0,
 	"status_bar_visible": true
 }

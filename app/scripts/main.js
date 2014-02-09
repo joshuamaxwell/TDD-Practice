@@ -26,12 +26,14 @@ function Collection (models) {
     if ( _.has(model, 'id') === false) throw new Error("you must provide a single model with an id property as an argument");
     if (arguments.length > 1) throw new Error("you must provide a single model with an id property as an argument");
     this.models.push(model);
+    this.length = this.models.length
   }
 
   this.remove = function (id) {
     if (arguments.length > 1) throw new Error("you must provide a single 'id' string as an argument");
     else { 
       this.models = _.reject(this.models, function(elem){ return( elem.id === id )});
+      this.length = this.models.length;
       return true;
     }
   }
@@ -40,6 +42,7 @@ function Collection (models) {
     if (arguments.length > 0) throw new Error("This method does not receive any arguments");
     else {
       this.models = [];
+      this.length = this.models.length;
       return true;
     }
   }
@@ -51,8 +54,10 @@ function Collection (models) {
     return _.sample(this.models, num);
   }
 
-  this.length = function() {
+  this.getLength = function() {
     if (arguments.length > 0) throw new Error(" the .length() method receives NO arguments");
     return this.models.length;
   }
+
+  this.length = this.models.length;
 }

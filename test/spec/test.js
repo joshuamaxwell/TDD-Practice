@@ -1,6 +1,4 @@
 /* global describe, it */
-
-/* global describe, it */
  
 (function () {
     'use strict';
@@ -186,25 +184,50 @@
 
       });
 
-      describe("has a .length() method", function(){
+      describe("has a .getLength() method", function(){
         it("should return the length of the array in the models property", function() {
           var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
-          expect(students.length()).to.equal(students.models.length);
+          expect(students.getLength()).to.equal(students.models.length);
         });
 
         it("should not accept any arguments", function() {
           var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
-          expect(function() { students.length('a')}).to.throw(Error);
-          expect(function() { students.length(2)}).to.throw(Error);
-          expect(function() { students.length({})}).to.throw(Error);
+          expect(function() { students.getLength('a')}).to.throw(Error);
+          expect(function() { students.getLength(2)}).to.throw(Error);
+          expect(function() { students.getLength({})}).to.throw(Error);
         });
 
         it("should not alter the original models array", function() {
           var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
           var beforeArray = students.models;
-          students.length();
+          students.getLength();
           var afterArray = students.models;
           expect(beforeArray).to.equal(afterArray);
+        });
+
+
+      });
+
+      describe("has a .length property", function (){
+        it("should return the length of the models array", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          expect(students.length).to.equal(students.models.length);
+        })
+
+        it("should return the accurate length if new models are added", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          var previousLength = students.length;
+          students.add({name:"joshua", id: '33'});
+          var newLength = students.length;
+          expect(newLength).to.equal(previousLength + 1);
+        });
+
+        it("should return the accurate length if new models are removed", function() {
+          var students = new Collection ([{name:'jim', id: '99'}, {name:'bob', id: '24'}, {name:'sue', id: '12'}, {name:'dan', id: '44'}]);
+          var previousLength = students.length;
+          students.remove('99');
+          var newLength = students.length;
+          expect(newLength).to.equal(previousLength - 1);
         });
 
 
